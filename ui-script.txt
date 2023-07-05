@@ -1,0 +1,52 @@
+name: Gherkin Syntax Highlighting
+description: Add syntax highlighting
+author: Sebastian Thiems
+version: 1.0
+includes: ^(suites|cases)/view
+excludes:
+
+js:
+function waitForElement(selector) {
+	return new Promise(resolve => {
+		if (document.querySelector(selector)) {
+			return resolve(document.querySelector(selector));
+		}
+
+		const observer = new MutationObserver(mutations => {
+			if (document.querySelector(selector)) {
+				resolve(document.querySelector(selector));
+				observer.disconnect();
+			}
+		});
+
+		observer.observe(document.body, {
+			childList: true,
+			subtree: true
+		});
+	});
+}
+
+$(document).ready(
+	function () {
+		waitForElement(".gherkin-keyword").then((elm) => {
+			const elements = document.querySelectorAll("[id*='scenarioContentShow']");
+			console.log(elements);				
+
+			for (var i = 0, element; element = elements[i]; i++) {
+				console.log(element.innerHTML)	
+				element.innerHTML = element.innerHTML.replace(/<span class="gherkin-condition">/g, '<br><span class="gherkin-condition">')
+			}
+
+
+		});
+	}
+);
+
+css:
+.gherkin-keyword {
+	color: #FA235E;
+}
+.gherkin-condition {
+	color: #50E000;
+	padding-left: 10px;
+}

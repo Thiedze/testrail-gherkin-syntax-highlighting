@@ -28,13 +28,14 @@ function waitForElement(selector) {
 
 $(document).ready(
 	function () {
-		waitForElement(".gherkin-keyword").then((elm) => {
+		waitForElement("[id*='scenarioContentShow']").then(() => {
 			const elements = document.querySelectorAll("[id*='scenarioContentShow']");
 			console.log(elements);				
 
 			for (var i = 0, element; element = elements[i]; i++) {
 				console.log(element.innerHTML)	
 				element.innerHTML = element.innerHTML.replace(/<span class="gherkin-condition">/g, '<br><span class="gherkin-condition">')
+				// element.innerHTML = element.innerHTML.replace(/<\/span>/g, "</span>")
 			}
 
 

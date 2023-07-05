@@ -35,7 +35,6 @@ $(document).ready(
 			for (var i = 0, element; element = elements[i]; i++) {
 				console.log(element.innerHTML)	
 				element.innerHTML = element.innerHTML.replace(/<span class="gherkin-condition">/g, '<br><span class="gherkin-condition">')
-				// element.innerHTML = element.innerHTML.replace(/<\/span>/g, "</span>")
 			}
 
 

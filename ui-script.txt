@@ -6,47 +6,18 @@ includes: ^(suites|cases)/view
 excludes:
 
 js:
-function waitForElement(selector) {
-	return new Promise(resolve => {
-		if (document.querySelector(selector)) {
-			return resolve(document.querySelector(selector));
-		}
-
-		const observer = new MutationObserver(mutations => {
-			if (document.querySelector(selector)) {
-				resolve(document.querySelector(selector));
-				observer.disconnect();
-			}
-		});
-
-		observer.observe(document.body, {
-			childList: true,
-			subtree: true
-		});
-	});
-}
-
 $(document).ready(
 	function () {
-		waitForElement("[id*='scenarioContentShow']").then(() => {
-			const elements = document.querySelectorAll("[id*='scenarioContentShow']");
-			console.log(elements);				
-
-			for (var i = 0, element; element = elements[i]; i++) {
-				console.log(element.innerHTML)	
-				element.innerHTML = element.innerHTML.replace(/<span class="gherkin-condition">/g, '<br><span class="gherkin-condition">')
-			}
-
-
-		});
 	}
 );
 
 css:
 .gherkin-keyword {
 	color: #FA235E;
+	display: block;
 }
 .gherkin-condition {
 	color: #50E000;
 	padding-left: 10px;
+	display: block;
 }
